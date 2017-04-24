@@ -68,7 +68,7 @@ def clean(txt):
     suspicious_chars = ['&#x0D;', '&#x0A;']
     for x in suspicious_chars:
         if x in txt:
-            print('Warning: suspicious character found (%s)' % x)
+            print('Warning: suspicious character found (%r)' % x)
             txt = txt.replace(x, '')
 
     return txt
