@@ -14,24 +14,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     add = parser.add_argument  # shortcut
     add('files', metavar='FILE', nargs='+', help='fichero xml con los textos')
-    add('--output', '-o', help='fichero de salida')
     add('--overwrite', action='store_true',
         help='no comprobar si el fichero de salida existe')
     args = parser.parse_args()
 
-    if len(args.files) == 1:
-        outfname = args.output or '%s.txt' % args.files[0]
+    for fname in args.files:
+        outfname = '%s.txt' % fname
         if not args.overwrite:
             check_if_exists(outfname)
-        extract(args.files[0], outfname)
-    else:
-        if args.output:
-            sys.exit('Can only use --output for a single file.')
-        for fname in args.files:
-            outfname = '%s.txt' % fname
-            if not args.overwrite:
-                check_if_exists(outfname)
-            extract(fname, outfname)
+        extract(fname, outfname)
 
 
 def extract(fname, outfname):
